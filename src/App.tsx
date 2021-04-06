@@ -1,3 +1,4 @@
+import Button, {ButtonSize, ButtonType} from './components/Button/button'
 import "./App.scss";
 
 function App() {
@@ -5,14 +6,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>Yuger-UI：基于 React 和 TypeScript 开发的 UI 库.</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Button btnType={ButtonType.Primary} size={ButtonSize.Small}>按钮</Button>
+        <Button btnType={ButtonType.Link} href="www.baidu.com">Link Button</Button>
       </header>
     </div>
   );
