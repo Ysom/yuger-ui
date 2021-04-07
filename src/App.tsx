@@ -7,14 +7,14 @@ function App() {
       <header className="App-header">
         <p>Yuger-UI：基于 React 和 TypeScript 开发的 UI 库.</p>
         <div>
-          <Button disabled>Default</Button>
+          <Button>Default</Button>
           <Button btnType={ButtonType.Primary} size={ButtonSize.Small}>
             Primary Small
           </Button>
           <Button btnType={ButtonType.Danger} size={ButtonSize.Large}>
             Danger Large
           </Button>
-          <Button btnType={ButtonType.Link} href="www.baidu.com">
+          <Button btnType={ButtonType.Link} href="https://www.baidu.com" target="_blank">
             Link
           </Button>
           <Button btnType={ButtonType.Link} disabled href="www.baidu.com">
