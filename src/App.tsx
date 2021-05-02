@@ -24,12 +24,15 @@ function App() {
           </Button>
         </div>
         <div className="menu-container">
-          <Menu>
-            <MenuItem>
+          <Menu defaultIndex={0} onSelect={(index) => { console.log(index) }}>
+            <MenuItem index={0}>
               first Menu
             </MenuItem>
-            <MenuItem>
+            <MenuItem index={1}>
               second Menu
+            </MenuItem>
+            <MenuItem index={2} disabled>
+              third Menu
             </MenuItem>
           </Menu>
         </div>
