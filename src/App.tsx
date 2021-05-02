@@ -1,4 +1,6 @@
 import Button, { ButtonSize, ButtonType } from "./components/Button/button";
+import Menu from './components/Menu/menu';
+import MenuItem from './components/Menu/menuItem';
 import "./App.scss";
 
 function App() {
@@ -6,7 +8,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>Yuger-UI：基于 React 和 TypeScript 开发的 UI 库.</p>
-        <div>
+        <div className="btn-container">
           <Button>Default</Button>
           <Button btnType={ButtonType.Primary} size={ButtonSize.Small}>
             Primary Small
@@ -20,6 +22,16 @@ function App() {
           <Button btnType={ButtonType.Link} disabled href="www.baidu.com">
             Link Disabled
           </Button>
+        </div>
+        <div className="menu-container">
+          <Menu>
+            <MenuItem>
+              first Menu
+            </MenuItem>
+            <MenuItem>
+              second Menu
+            </MenuItem>
+          </Menu>
         </div>
       </header>
     </div>
