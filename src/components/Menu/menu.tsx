@@ -35,8 +35,9 @@ const Menu: React.FC<MenuProps> = (props) => {
     onSelect: handleClick,
   }
 
+  // data-testid 用于测试case拿到元素
   return (
-    <ul className={classes} style={style}>
+    <ul className={classes} style={style} data-testid="test-menu">
       <MenuContext.Provider value={passedContext}>
         { children }
       </MenuContext.Provider>
