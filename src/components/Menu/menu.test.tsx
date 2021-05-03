@@ -22,7 +22,7 @@ const generateMenu = (props: MenuProps) => {
       <MenuItem disabled index={1}>
         disabled
       </MenuItem>
-      <MenuItem index={3}>
+      <MenuItem index={2}>
         normal
       </MenuItem>
     </Menu>
@@ -54,7 +54,7 @@ describe('test Menu and MenuItem component', () => {
     expect(testProps.onSelect).toHaveBeenCalledWith(2);
     fireEvent.click(disableElement);
     expect(disableElement).not.toHaveClass('is-active');
-    expect(disableElement).not.toHaveBeenCalledWith(1);
+    expect(testProps.onSelect).not.toHaveBeenCalledWith(1);
   });
   it('should render vertical mode when mode is set to vertical', () => {
     cleanup();
