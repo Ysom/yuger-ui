@@ -24,6 +24,7 @@ const Menu: React.FC<MenuProps> = (props) => {
   const [currentActive, setActive] = useState(defaultIndex);
   const classes = classNames('yuger-menu', className, {
     'menu-vertical': mode === 'vertical',
+    'menu-horizontal': mode !== 'vertical',
   })
   const handleClick = (index: number) => {
     setActive(index);
@@ -41,14 +42,14 @@ const Menu: React.FC<MenuProps> = (props) => {
       // FunctionComponentElement 这里要拿到的是 child 实例
       const childElement = child as React.FunctionComponentElement<MenuItemProps>;
       const { displayName } = childElement.type;
-      if(displayName === 'MenuItem') {
+      if(displayName === 'MenuItem' || displayName === 'SubMenu') {
         // return child;
         // 这里通过cloneElement方法，克隆元素并传入index，使得不用手动在MenuItem上加上index
         return React.cloneElement(childElement, {
           index,
         });
       } else {
-        console.error('Warning: Menu has a child which is not a MenuItem component');
+        console.error('Warning: Menu has a child which is not a MenuItem component or SubMenu');
       }
     });
   }

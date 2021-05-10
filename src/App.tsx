@@ -1,6 +1,7 @@
 import Button, { ButtonSize, ButtonType } from "./components/Button/button";
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem';
+import SubMenu from './components/Menu/subMenu';
 import "./App.scss";
 
 function App() {
@@ -24,14 +25,18 @@ function App() {
           </Button>
         </div>
         <div className="menu-container">
-          <Menu defaultIndex={0} onSelect={(index) => { console.log(index) }}>
-            <MenuItem index={0}>
+          <Menu defaultIndex={0} onSelect={(index) => { console.log(index) }} mode="vertical">
+            <MenuItem>
               first Menu
             </MenuItem>
-            <MenuItem index={1}>
+            <MenuItem>
               second Menu
             </MenuItem>
-            <MenuItem index={2} disabled>
+            <SubMenu title="SubMenu title">
+              <MenuItem>item1</MenuItem>
+              <MenuItem>item2</MenuItem>
+            </SubMenu>
+            <MenuItem disabled>
               third Menu
             </MenuItem>
           </Menu>
