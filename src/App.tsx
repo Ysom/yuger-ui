@@ -25,7 +25,12 @@ function App() {
           </Button>
         </div>
         <div className="menu-container">
-          <Menu defaultIndex={0} onSelect={(index) => { console.log(index) }} mode="vertical">
+          <Menu 
+            defaultIndex='0'
+            onSelect={(index) => { console.log(index) }}
+            mode="vertical"
+            defaultOpenSubMenus={['2']}
+          >
             <MenuItem>
               first Menu
             </MenuItem>
