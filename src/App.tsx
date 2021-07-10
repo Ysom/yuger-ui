@@ -34,7 +34,6 @@ function App() {
           <Menu 
             defaultIndex='0'
             onSelect={(index) => { console.log(index) }}
-            mode="vertical"
             defaultOpenSubMenus={['2']}
           >
             <MenuItem>
