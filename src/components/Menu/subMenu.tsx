@@ -1,6 +1,7 @@
 import React, { useContext, useState, FunctionComponentElement } from 'react';
 import classNames from 'classnames';
 import Icon from '../Icon/icon';
+import Transition from '../Transition';
 import { MenuContext } from './menu';
 import { MenuItemProps } from './menuItem';
 
@@ -16,7 +17,7 @@ const SubMenu: React.FC<SubMenuProps> = ({ index, title, children, className }) 
   const openedSubMenus = context.defaultOpenSubMenus as Array<string>;
   const isOpend = (index && context.mode === 'vertical') ? openedSubMenus.includes(index) : false;
   const [menuOpen, setOpen] = useState(isOpend);
-  
+
   const classes = classNames('menu-item submenu-item', className, {
     'is-active': context.index === index,
     'is-opend': menuOpen,
@@ -53,7 +54,7 @@ const SubMenu: React.FC<SubMenuProps> = ({ index, title, children, className }) 
     });
     const childrenComponent = React.Children.map(children, (child, i) => {
       const childElement = child as FunctionComponentElement<MenuItemProps>;
-      if(childElement.type.displayName === 'MenuItem') {
+      if (childElement.type.displayName === 'MenuItem') {
         return React.cloneElement(childElement, {
           index: `${index}-${i}`,
         });
@@ -62,9 +63,15 @@ const SubMenu: React.FC<SubMenuProps> = ({ index, title, children, className }) 
       }
     });
     return (
-      <ul className={subMenuClasses}>
-        {childrenComponent}
-      </ul>
+      <Transition
+        in={menuOpen}
+        timeout={300}
+        animation="zoom-in-top"
+      >
+        <ul className={subMenuClasses}>
+          {childrenComponent}
+        </ul>
+      </Transition>
     )
   };
 
