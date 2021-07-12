@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import Button, { ButtonSize, ButtonType } from "./components/Button/button";
@@ -6,11 +6,13 @@ import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem';
 import SubMenu from './components/Menu/subMenu';
 import Icon from './components/Icon/icon';
+import Transition from './components/Transition';
 import "./App.scss";
 
 library.add(fas);
 
 function App() {
+  const [show, setShow] = useState(false);
   return (
     <div className="App">
       <header className="App-header">
@@ -20,8 +22,8 @@ function App() {
           <Button btnType={ButtonType.Primary} size={ButtonSize.Small}>
             Primary Small
           </Button>
-          <Button btnType={ButtonType.Danger} size={ButtonSize.Large}>
-            Danger Large
+          <Button btnType={ButtonType.Danger} size={ButtonSize.Large} onClick={() => {setShow(!show)}}>
+            Danger Large Toggle
           </Button>
           <Button btnType={ButtonType.Link} href="https://www.baidu.com" target="_blank">
             Link
@@ -52,6 +54,14 @@ function App() {
           </Menu>
           <Icon icon="arrow-down" theme="primary"/>
         </div>
+        <Transition
+          in={show}
+          timeout={300}
+          animation="zoom-in-top"
+          wrapper
+        >
+          <Button>按钮</Button>
+        </Transition>
       </header>
     </div>
   );
