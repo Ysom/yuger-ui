@@ -10,7 +10,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size
   disabled?: boolean;
   size?: InputSize;
   icon?: IconProp;
-  prepand?: string | ReactElement;
+  prepend?: string | ReactElement;
   append?: string | ReactElement;
 };
 
@@ -33,11 +33,24 @@ export const Input: FC<InputProps> = (props) => {
     'input-group-prepend': !!prepend
   });
 
+  // 处理值为undefined或null时 受控与非受控切换的警告提示
+  const fixControlledValue = (value: any) => {
+    if (typeof value === 'undefined' || value === null) {
+      return '';
+    }
+    return value;
+  }
+  // 处理同时存在默认值与传入值时 受控与非受控切换的警告提示
+  if ('value' in props) {
+    delete restProps.defaultValue;
+    restProps.value = fixControlledValue(props.value);
+  }
+
   return (
     <div className={cnames} style={style}>
       {prepend && <div className="yuger-input-group-prepend">{prepend}</div>}
-      {icon && <div className="icon-wrapper"><Icon icon={icon} title={`title-${icon}`}/></div>}
-      <input 
+      {icon && <div className="icon-wrapper"><Icon icon={icon} title={`title-${icon}`} /></div>}
+      <input
         className="yuger-input-inner"
         disabled={disabled}
         {...restProps}

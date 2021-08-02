@@ -7,6 +7,7 @@ import MenuItem from './components/Menu/menuItem';
 import SubMenu from './components/Menu/subMenu';
 import Icon from './components/Icon/icon';
 import Transition from './components/Transition';
+import Input from './components/Input/input';
 import "./App.scss";
 
 library.add(fas);
@@ -22,7 +23,7 @@ function App() {
           <Button btnType={ButtonType.Primary} size={ButtonSize.Small}>
             Primary Small
           </Button>
-          <Button btnType={ButtonType.Danger} size={ButtonSize.Large} onClick={() => {setShow(!show)}}>
+          <Button btnType={ButtonType.Danger} size={ButtonSize.Large} onClick={() => { setShow(!show) }}>
             Danger Large Toggle
           </Button>
           <Button btnType={ButtonType.Link} href="https://www.baidu.com" target="_blank">
@@ -33,7 +34,7 @@ function App() {
           </Button>
         </div>
         <div className="menu-container">
-          <Menu 
+          <Menu
             defaultIndex='0'
             onSelect={(index) => { console.log(index) }}
             defaultOpenSubMenus={['2']}
@@ -52,7 +53,7 @@ function App() {
               third Menu
             </MenuItem>
           </Menu>
-          <Icon icon="arrow-down" theme="primary"/>
+          <Icon icon="arrow-down" theme="primary" />
         </div>
         <Transition
           in={show}
@@ -62,6 +63,11 @@ function App() {
         >
           <Button>按钮</Button>
         </Transition>
+
+        <Input
+          defaultValue="input value"
+          size="sm"
+        />
       </header>
     </div>
   );
