@@ -27,13 +27,38 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
     }
   };
 
+  const handleSelect = (item: string) => {
+    setInputValue(item);
+    setSuggestions([]);
+    if (onSelect) {
+      onSelect(item);
+    }
+  };
+
+  const generateDropdown = () => {
+    return (
+      <ul>
+        {
+          suggestions.map((item, index) => {
+            return (
+              <li key={index} onClick={() => handleSelect(item)}>
+                {item}
+              </li>
+            );
+          })
+        }
+      </ul>
+    );
+  };
+
   return (
     <div className="yuger-auto-complete">
       <Input
-        value={value}
+        value={inputValue}
         onChange={handleChange}
         { ...restProps }
       />
+      {suggestions.length && generateDropdown()}
     </div>
   );
 };
