@@ -1,9 +1,16 @@
-import React, { FC, useState, ChangeEvent } from 'react';
+import React, { FC, useState, ChangeEvent, ReactElement } from 'react';
 import Input, { InputProps } from '../Input/input';
 
+interface DataSourceObject {
+  value: string;
+};
+
+export type DataSourceType<T = {}> = T & DataSourceObject;
+
 export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
-  fetchSuggestions: (str: string) => string[];
-  onSelect?: (item: string) => void;
+  fetchSuggestions: (str: string) => DataSourceType[];
+  onSelect?: (item: DataSourceType) => void;
+  renderOptions?: (item: DataSourceType) => ReactElement;
 };
 
 export const AutoComplete: FC<AutoCompleteProps> = (props) => {
@@ -11,11 +18,12 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
     fetchSuggestions,
     onSelect,
     value,
+    renderOptions,
     ...restProps
   } = props;
 
   const [inputValue, setInputValue] = useState(value);
-  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [suggestions, setSuggestions] = useState<DataSourceType[]>([]);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
     setInputValue(value);
@@ -27,12 +35,16 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
     }
   };
 
-  const handleSelect = (item: string) => {
-    setInputValue(item);
+  const handleSelect = (item: DataSourceType) => {
+    setInputValue(item.value);
     setSuggestions([]);
     if (onSelect) {
       onSelect(item);
     }
+  };
+
+  const renderTemplate = (item: DataSourceType) => {
+    return renderOptions ? renderOptions(item) : item.value;
   };
 
   const generateDropdown = () => {
@@ -42,7 +54,7 @@ export const AutoComplete: FC<AutoCompleteProps> = (props) => {
           suggestions.map((item, index) => {
             return (
               <li key={index} onClick={() => handleSelect(item)}>
-                {item}
+                {renderTemplate(item)}
               </li>
             );
           })
